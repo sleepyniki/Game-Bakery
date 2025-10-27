@@ -13,6 +13,8 @@ public class playerhandeler : MonoBehaviour
 
     Vector3 moveDirection;
 
+    Rigidbody rb;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,6 +26,11 @@ public class playerhandeler : MonoBehaviour
         myinput();
     }
 
+    private void FixedUpdate()
+    {
+        moveplayer();
+    }
+
     private void myinput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -33,6 +40,7 @@ public class playerhandeler : MonoBehaviour
     private void moveplayer()
     {
        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+       rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
 }
-
