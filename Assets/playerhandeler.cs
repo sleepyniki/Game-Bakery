@@ -1,30 +1,38 @@
 using System;
+using System.Numerics;
 using UnityEngine;
 
 public class playerhandeler : MonoBehaviour
 {
-    Rigidbody rb;
-    public Rigidbody Rb;
-    [SerializeField] private float playerspeed;
+    public float moveSpeed;
 
+    public Transform orientation;
 
-    private void Awake()
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        rb.MovePosition(rb.position + movement * playerspeed * Time.fixedDeltaTime);
+        myinput();
     }
 
-    void Update()
+    private void myinput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * 300);
-        }
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+    }
+
+    private void moveplayer()
+    {
+       moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
     }
 }
 
