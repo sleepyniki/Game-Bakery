@@ -270,8 +270,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c338faf338cb744b11008bcaa1d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rb: {fileID: 237110142}
-  playerspeed: 5
+  moveSpeed: 5
+  groundDrag: 0
+  playerHeight: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  orientation: {fileID: 2083263905}
 --- !u!1 &301851066
 GameObject:
   m_ObjectHideFlags: 0
