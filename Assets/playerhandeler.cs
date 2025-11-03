@@ -39,11 +39,12 @@ public class playerhandeler : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
 
         if (grounded)
-            rb.linearDamping = groundDrag;
+            rb.drag = groundDrag;
         else
-            rb.linearDamping = 1;
+            rb.drag = 1f;
 
         myinput();
+        speedcontrol();
     }
 
     private void FixedUpdate()
@@ -56,7 +57,7 @@ public class playerhandeler : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(KeyCode.Space) && readyToJump && grounded)
+        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
@@ -71,16 +72,28 @@ public class playerhandeler : MonoBehaviour
 
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        
+
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
+    private void speedcontrol()
+    {
+        // limit horizontal speed without affecting vertical velocity
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+
     private void Jump()
     {
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     private void ResetJump()
