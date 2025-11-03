@@ -39,9 +39,9 @@ public class playerhandeler : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
 
         if (grounded)
-            rb.drag = groundDrag;
+            rb.linearDamping = groundDrag;
         else
-            rb.drag = 1f;
+            rb.linearDamping = 1f;
 
         myinput();
         speedcontrol();
@@ -74,24 +74,24 @@ public class playerhandeler : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 0.5f * airMultiplier, ForceMode.Force);
     }
 
     private void speedcontrol()
     {
         // limit horizontal speed without affecting vertical velocity
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 
 
     private void Jump()
     {
-    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+    rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
     rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
