@@ -15,7 +15,7 @@ public class platformmovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(Vector3.Distance(transform.position, points[i].position) < 0.02f)
         {
@@ -36,5 +36,15 @@ public class platformmovement : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         collision.transform.SetParent(null);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.transform.SetParent(transform);
+    }
+        
+    private void OnTriggerExit(Collider other)
+    {
+        other.transform.SetParent(null);
     }
 }
