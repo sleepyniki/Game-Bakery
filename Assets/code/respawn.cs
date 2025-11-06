@@ -1,23 +1,25 @@
+
 using UnityEngine;
 
 public class respawn : MonoBehaviour
 {
-    [SerializeField] private Transform player;
 
-    [SerializeField] private Transform spawnPoint;
-
+    [SerializeField] GameObject player;
+    [SerializeField] Transform spawnPoint;
     [SerializeField] float spawnValue;
 
+    // Update is called once per frame
     void Update()
     {
-        if (player.position.y < spawnValue)
+        if(player.transform.position.y < -spawnValue)
         {
-            respawnpoint();
+            RespawnPoint();
         }
     }
 
-    private void respawnpoint()
+    void RespawnPoint()
     {
-        player.position = spawnPoint.position;
+        transform.position = spawnPoint.position;
     }
+      
 }
