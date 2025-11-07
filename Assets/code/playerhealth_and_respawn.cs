@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     [SerializeField] GameObject player;
     [SerializeField] Transform spawnPoint;
+    [SerializeField] float spawnValue;
 
     void Start()
     {
@@ -24,6 +25,14 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
         UpdateHealthUI();
+    }
+
+     void Update()
+    {
+        if(player.transform.position.y < -spawnValue)
+        {
+            Die();
+        }
     }
 
     public void Heal(int amount)
@@ -46,8 +55,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        // Handle player death (e.g., reload scene, show game over screen)
-        transform.position = spawnPoint.position;
+        transform.position = spawnPoint.position;       // go back to spawn point
+        currentHealth = maxHealth; // reset health
+        UpdateHealthUI();
         Debug.Log("Player died");
     }
 }
