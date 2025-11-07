@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class playerhandeler : MonoBehaviour
 {
+    [Header("Movement Settings")]
     public float moveSpeed;
 
+    [Header("Drag")]
     public float groundDrag;
-
+    
+    [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -14,12 +17,15 @@ public class playerhandeler : MonoBehaviour
 
     public KeyCode jumpKey = KeyCode.Space;
 
+    [Header("Ground Check")]
     public float playerHeight;
     public LayerMask groundLayer;
     bool grounded;
 
+    [Header("Orientation")]
     public Transform orientation;
 
+    [Header("Input")]
     float horizontalInput;
     float verticalInput;
 
