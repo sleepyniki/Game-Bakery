@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(player.transform.position.y < -spawnValue)
         {
+            currentHealth = 0;
             Die();
         }
     }
