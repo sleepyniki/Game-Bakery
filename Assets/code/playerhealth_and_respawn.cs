@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,22 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] float spawnValue;
 
+    [Header("UI Settings")]
+
+    [SerializeField] private Image healthBar;
+    
+
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthUI();
+       
     }
 
+
+    public void updatehealthbar(float maxHealth, float currentHealth)
+    {
+        healthBar.fillAmount = currentHealth / maxHealth;
+    }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -27,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = 0;
             Die();
         }
-        UpdateHealthUI();
+
     }
 
      void Update()
@@ -46,22 +57,14 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        UpdateHealthUI();
     }
 
-    void UpdateHealthUI()
-    {
-        if (healthSlider != null)
-        {
-            healthSlider.value = currentHealth;
-        }
-    }
-
+   
     void Die()
     {
-        transform.position = spawnPoint.position;       // go back to spawn point
-        currentHealth = maxHealth; // reset health
-        UpdateHealthUI();
+        transform.position = spawnPoint.position;  
+        currentHealth = maxHealth; 
+
         Debug.Log("Player died");
     }
 }

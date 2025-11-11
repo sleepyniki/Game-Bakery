@@ -16,7 +16,7 @@ public class ICEdrop : MonoBehaviour
     {
 
         int randomindex = Random.Range(0, enamys.Length);
-        Vector3 randomspawnposition = new Vector3(Random.Range(-2.5f, 2.5f), 8f, Random.Range(18f, 45f));
+        Vector3 randomspawnposition = new Vector3(Random.Range(-2.5f, 2.5f), 8f, Random.Range(18f, 48f));
 
         Instantiate(enamys[randomindex], randomspawnposition, Quaternion.identity);
 
