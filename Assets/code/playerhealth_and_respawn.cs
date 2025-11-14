@@ -27,13 +27,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthBar.updatehealthbar(maxHealth, currentHealth);
-        
+    
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             Die();
+        }
+        else
+        {
+            healthBar.updatehealthbar(maxHealth, currentHealth);
         }
 
     }
@@ -53,8 +56,9 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
-            healthBar.updatehealthbar(maxHealth, currentHealth);
         }
+        
+        healthBar.updatehealthbar(maxHealth, currentHealth);
         
     }
 
