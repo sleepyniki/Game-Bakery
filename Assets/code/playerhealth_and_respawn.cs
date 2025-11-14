@@ -7,31 +7,28 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth = 100;
     private int currentHealth;
-    public Slider healthSlider;
+
+    [SerializeField] private healthbar healthBar;
+    
 
     [Header("Player respawn Settings")]
     [SerializeField] GameObject player;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float spawnValue;
 
-    [Header("UI Settings")]
-
-    [SerializeField] private Image healthBar;
     
 
     void Start()
     {
         currentHealth = maxHealth;
        
+       healthBar.updatehealthbar(maxHealth, currentHealth);
     }
 
-
-    public void updatehealthbar(float maxHealth, float currentHealth)
-    {
-        healthBar.fillAmount = currentHealth / maxHealth;
-    }
     public void TakeDamage(int damage)
     {
+        healthBar.updatehealthbar(maxHealth, currentHealth);
+        
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -56,7 +53,9 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
+            healthBar.updatehealthbar(maxHealth, currentHealth);
         }
+        
     }
 
    
@@ -64,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
     {
         transform.position = spawnPoint.position;  
         currentHealth = maxHealth; 
-
+        healthBar.updatehealthbar(maxHealth, currentHealth);
         Debug.Log("Player died");
     }
 }
