@@ -5,9 +5,11 @@ public class playerhandeler : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed;
+    public float moveSpeedonIce;
 
     [Header("Drag")]
     public float groundDrag;
+    public float iceDrag;
     
     [Header("Jump")]
     public float jumpForce;
@@ -17,9 +19,10 @@ public class playerhandeler : MonoBehaviour
 
     public KeyCode jumpKey = KeyCode.Space;
 
-    [Header("Ground Check")]
+    [Header("Surface Check")]
     public float playerHeight;
     public LayerMask groundLayer;
+    public LayerMask iceLayer;
     bool grounded;
 
     [Header("Orientation")]
@@ -42,13 +45,14 @@ public class playerhandeler : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer | iceLayer);
 
         if (grounded)
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 1f;
 
+        
         myinput();
         speedcontrol();
     }
@@ -81,6 +85,17 @@ public class playerhandeler : MonoBehaviour
 
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 0.5f * airMultiplier, ForceMode.Force);
+    }
+
+     private void moveplayerice()
+    {
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        if (onIce)
+            rb.AddForce(moveDirection.normalized * moveSpeedonIce * 10f, ForceMode.Force);
+
+        else if (!onIce)
+            rb.AddForce(moveDirection.normalized * moveSpeedonIce * 0.5f * airMultiplier, ForceMode.Force);
     }
 
     private void speedcontrol()
