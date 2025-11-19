@@ -24,6 +24,7 @@ public class playerhandeler : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask iceLayer;
     bool grounded;
+    bool onIce;
 
     [Header("Orientation")]
     public Transform orientation;
@@ -45,21 +46,30 @@ public class playerhandeler : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayer | iceLayer);
+        float rayDist = playerHeight * 0.5f + 0.2f;
+        grounded = Physics.Raycast(transform.position, Vector3.down, rayDist, groundLayer | iceLayer);
+        onIce = Physics.Raycast(transform.position, Vector3.down, rayDist, iceLayer);
 
         if (grounded)
-            rb.linearDamping = groundDrag;
+        {
+            if (onIce)
+                rb.linearDamping = iceDrag;
+            else
+                rb.linearDamping = groundDrag;
+        }
         else
             rb.linearDamping = 1f;
 
-        
         myinput();
         speedcontrol();
     }
 
     private void FixedUpdate()
     {
-        moveplayer();
+        if (onIce)
+            moveplayerice();
+        else
+            moveplayer();
     }
 
     private void myinput()
