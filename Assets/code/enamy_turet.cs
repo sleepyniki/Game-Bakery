@@ -57,7 +57,18 @@ public class enamy_turet : MonoBehaviour
 
                 if (timebetweenshots <= 0)
                 {
-                    Instantiate(projectile, shootpoint.position, shootpoint.rotation);
+                    if (projectile != null && shootpoint != null && player != null)
+                    {
+                        Vector3 targetPos = new Vector3(player.position.x, shootpoint.position.y, player.position.z);
+                        Vector3 direction = (targetPos - shootpoint.position).normalized;
+                        Quaternion rot = Quaternion.LookRotation(direction);
+                        Instantiate(projectile, shootpoint.position, rot);
+                    }
+                    else
+                    {
+                        Instantiate(projectile, shootpoint.position, shootpoint.rotation);
+                    }
+
                     timebetweenshots = starttimebetweenshots;
                 }
                 else
@@ -70,8 +81,8 @@ public class enamy_turet : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, activationRange);
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stoprange);
     }
 }
