@@ -7,6 +7,7 @@ public class Win : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             Debug.Log("you won!");
+            Destroy(gameObject);
         }
     }
 }
