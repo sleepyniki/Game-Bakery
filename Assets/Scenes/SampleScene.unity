@@ -1394,6 +1394,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f29f6a48a0973439fd63feb061ee23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &334703518
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334703509}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8206276802895213831, guid: 8d7b27a2015dc734c841b9110390cf7a, type: 3}
 --- !u!1 &343212590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3386,7 +3408,7 @@ GameObject:
   - component: {fileID: 990546392}
   - component: {fileID: 990546391}
   - component: {fileID: 990546390}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: 'enamy platform '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3630,6 +3652,70 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: -0.0000019073486, z: 0}
+--- !u!1 &1027976620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027976622}
+  - component: {fileID: 1027976621}
+  m_Layer: 0
+  m_Name: NavMesh Surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1027976621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027976620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 0dc0653bacf71d2438e8130f27d05df1, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &1027976622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027976620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.014866, y: 7.513856, z: 36.081364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072297636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,7 +4257,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223221055}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -4475,7 +4561,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243501489}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -5004,6 +5090,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d7b27a2015dc734c841b9110390cf7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 334703514}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d7b27a2015dc734c841b9110390cf7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 334703518}
   m_SourcePrefab: {fileID: 100100000, guid: 8d7b27a2015dc734c841b9110390cf7a, type: 3}
 --- !u!1 &1538290649
 GameObject:
@@ -5035,7 +5124,7 @@ Transform:
   m_GameObject: {fileID: 1538290649}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.622135, y: 12.729868, z: -0.13352692}
+  m_LocalPosition: {x: 2.622135, y: 14.3, z: -0.13352692}
   m_LocalScale: {x: 0.2, y: 16.666668, z: 0.025086226}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5048,7 +5137,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538290649}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -5756,3 +5845,4 @@ SceneRoots:
   - {fileID: 1177389158}
   - {fileID: 1520701474}
   - {fileID: 1739889082}
+  - {fileID: 1027976622}
